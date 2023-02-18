@@ -1,0 +1,156 @@
+/*//////////////////////////////////////////Modification/////////////////////////////////////*/
+
+body {
+    background-color: #f9fff8;
+    font-family: 'Calps Sans';
+}
+
+.col-xxl-12 {
+    max-width: 1750px !important;
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #cdcdcd !important;
+    opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #cdcdcd !important;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #cdcdcd !important;
+}
+
+.btn:focus, .form-control:focus, .form-select:focus, .accordion-button:focus {
+    outline: none !important;
+    box-shadow: none;
+    border-color: rgba(59, 171, 113, 0.29);
+}
+
+
+/*///////////////////////////////////////////////Defined///////////////////////////////////////////////*/
+
+.text_color_default  {
+    color: #0c6c92;
+}
+
+.text_color_secondary  {
+    color: rgba(232, 190, 255, 0.6);
+}
+
+.text_color_1 {
+    color: #111111;
+}
+
+.text_color_2 {
+    color: #222222;
+}
+
+.text_color_3 {
+    color: #333333;
+}
+
+.text_color_4 {
+    color: #444444;
+}
+
+.text_color_5 {
+    color: #555555;
+}
+
+.text_color_6 {
+    color: #666666;
+}
+
+.text_color_7 {
+    color: #777777;
+}
+
+.text_color_8 {
+    color: #888888;
+}
+
+.text_color_9 {
+    color: #999999;
+}
+
+.text_color_a {
+    color: #aaaaaa;
+}
+
+.text_color_b {
+    color: #bbbbbb;
+}
+
+.text_color_c {
+    color: #cccccc;
+}
+
+.text_color_d {
+    color: #dddddd;
+}
+
+.text_color_e {
+    color: #eeeeee;
+}
+
+.btn_default {
+    background-color: #00afef;
+    color: #ffffff;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.5)!important;
+}
+
+.btn_default:hover {
+    background-color: rgba(31, 34, 141, 0.73);
+    color: white;
+}
+
+.btn_default:disabled {
+    background-color: #626f68;
+    color: #ffffff;
+    border-radius: 2px;
+}
+
+.btn_secondary {
+    background-color: #ff914d;
+    border: 1px solid #ff914d;
+    color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px rgba(1, 1, 1, 0.1);
+}
+
+.btn_secondary:hover {
+    color: #65bd5e;
+}
+
+.btn_secondary:disabled {
+    background-color: #626f68;
+    color: #2f1d1d;
+    border-radius: 2px;
+}
+
+.border_color_default {
+    border-color: #fbf5ff !important;
+}
+
+.border_color_primary {
+    border-color: #00afef !important;
+    border-width: 2px;
+}
+
+.background_color_default {
+    background-color: #A020F0;
+}
+
+.background_color_primary {
+    background-color: rgba(238,238,238,255);
+}
+
+.background_color_secondary {
+    background-color: rgba(182 236 255 / 15%);
+}
+
+
+
+
