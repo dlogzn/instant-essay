@@ -14,7 +14,8 @@ Route::group(['prefix' => '/control/panel/login'], function () {
 
 
 
-
+Route::get('/auth/google', [AuthController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
 
 
 

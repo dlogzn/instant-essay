@@ -50,14 +50,14 @@
                         <div class="row mt-4">
                             <div class="col">
                                 <div class="d-grid">
-                                    <a href="{{ url('/auth/redirect/to/google/dashboard') }}" class="btn btn_google px-2">
+                                    <a href="{{ url('/auth/google') }}" class="btn btn_google px-2">
                                         <i class="icon fab fa-google"></i> Google
                                     </a>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="d-grid">
-                                    <a href="{{ url('/auth/redirect/to/facebook/dashboard') }}" class="btn btn_facebook px-2">
+                                    <a href="{{ url('/auth/facebook') }}" class="btn btn_facebook px-2">
                                         <i class="icon fab fa-facebook-f"></i> Facebook
                                     </a>
                                 </div>
@@ -67,7 +67,7 @@
                         <div class="row mt-5">
                             <div class="col text-center">
                                 <span class="me-3">Need an account with Instant Essay?</span>
-                                <a class="btn btn-outline-info" href="{{ url('register') }}">Register</a>
+                                <a class="btn btn-outline-info" href="{{ url('/register') }}">Register</a>
                             </div>
                         </div>
                     </div>

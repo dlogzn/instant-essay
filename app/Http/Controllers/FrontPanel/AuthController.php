@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\FrontPanel;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -34,6 +36,42 @@ class AuthController extends Controller
             return response()->json(['message' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+
+
+    public function redirectToGoogle(): RedirectResponse
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback(): RedirectResponse
+    {
+        try {
+            $user = Socialite::driver('google')->user();
+            $dbUser = User::where('provider_id', $user->id)->where('provider_name', 'Google')->first();
+            if($dbUser) {
+                Auth::login($dbUser);
+                return redirect()->intended('/account/panel/essay');
+            } else {
+                $newUser = User::create([
+                    'provider_name' => 'Google',
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'provider_id'=> $user->id,
+                    'password' => encrypt('123456'),
+                    'for' => 'Account Panel',
+                    'status' => 'Active'
+                ]);
+                Auth::login($newUser);
+                return redirect()->intended('/account/panel/essay');
+            }
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+
+
 
     public function logout(): RedirectResponse
     {
