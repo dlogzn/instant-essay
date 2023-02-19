@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>{{ $title }} | {{ env('APP_NAME') }}</title>
+    <link rel="shortcut icon" href="{{ asset('storage/images/default/favicon.ico') }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>

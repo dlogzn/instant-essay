@@ -15,6 +15,9 @@ class AllowControlPanelAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (auth()->check() && auth()->user()->for === 'Control Panel') {
+            return $next($request);
+        }
+        return redirect('/control/panel/login');
     }
 }

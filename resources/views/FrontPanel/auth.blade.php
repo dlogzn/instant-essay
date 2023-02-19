@@ -4,10 +4,10 @@
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
                 <div class="text-center mt-4 mb-3">
-                    <img src="{{ asset('storage/images/default/icons8-sign-in-100.png') }}" style="height: 100px; width: 100px;">
+                    <img src="{{ asset('storage/images/default/icons8-enter-100.png') }}" style="height: 100px; width: 100px;">
                 </div>
                 <div class="text-center border-bottom pb-3" style="border-color: #e8f3ed !important;">
-                    <div class="h4 text_color_7">Log in to Inktales</div>
+                    <div class="h4 text_color_7">Log in to Instant Essay</div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-7 col-lg-6 col-xl-5 col-xxl-4 mx-auto">
@@ -46,6 +46,30 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="mt-4"><div class="horizontal_line_with_words">Or, Log in with</div></div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <div class="d-grid">
+                                    <a href="{{ url('/auth/redirect/to/google/dashboard') }}" class="btn btn_google px-2">
+                                        <i class="icon fab fa-google"></i> Google
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-grid">
+                                    <a href="{{ url('/auth/redirect/to/facebook/dashboard') }}" class="btn btn_facebook px-2">
+                                        <i class="icon fab fa-facebook-f"></i> Facebook
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col text-center">
+                                <span class="me-3">Need an account with Instant Essay?</span>
+                                <a class="btn btn-outline-info" href="{{ url('register') }}">Register</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div style="height: 50px;"></div>
@@ -77,7 +101,7 @@
                     $('#sign_in_form_submit').removeClass('disabled');
                     $('#sign_in_form_submit_text').removeClass('sr-only');
                     $('#sign_in_form_submit_processing').addClass('sr-only');
-                    location = '{{ url('/account/panel/tools') }}';
+                    location = '{{ url('/account/panel/essay') }}';
                 },
                 error: function (xhr) {
                     console.log(xhr);

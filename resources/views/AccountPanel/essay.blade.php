@@ -118,20 +118,23 @@
                         let apiResponse = result.payload.response.choices[0].text.split('\n');
                         $('#api_response').empty().append(`
                             <div class="d-flex justify-content-between mb-4">
-                                <div><i class="fa-regular fa-copy fa-2x text_color_default" id="copy_to_clipboard" data-clipboard-target="#response_text" style="cursor: pointer;"></i></div>
+                                <div><i class="fa-regular fa-copy fa-2x text_color_primary" id="copy_to_clipboard" data-clipboard-target="#response_text" style="cursor: pointer;"></i></div>
                                 <div>
-                                    <i class="fa-regular fa-star fa-2x text_color_default"></i>
-                                    <i class="fa-regular fa-star fa-2x text_color_default"></i>
-                                    <i class="fa-regular fa-star fa-2x text_color_default"></i>
-                                    <i class="fa-regular fa-star fa-2x text_color_default"></i>
-                                    <i class="fa-regular fa-star fa-2x text_color_default"></i>
+                                    <i class="fa-regular fa-star fa-2x text_color_primary"></i>
+                                    <i class="fa-regular fa-star fa-2x text_color_primary"></i>
+                                    <i class="fa-regular fa-star fa-2x text_color_primary"></i>
+                                    <i class="fa-regular fa-star fa-2x text_color_primary"></i>
+                                    <i class="fa-regular fa-star fa-2x text_color_primary"></i>
                                 </div>
                             </div>
-                            <div class="mt-4 fs-5" id="response_text"></div>
+                            <div class="mt-4 fs-5" id="response_text">
+                                <div class="fs-3 fw-bold">` + result.payload.title + `</div>
+                                <div style="margin: 15px;"></div>
+                            </div>
                         `);
                         $.each(apiResponse, function (key, row) {
                             if (row === '') {
-                                $('#response_text').append('<div class="mb-3"></div>');
+                                $('#response_text').append('<div style="margin: 15px;"></div>');
                             } else {
                                 if (row !== '' && row !== undefined) {
                                     $('#response_text').append('<div class="mb-1">' + row + '</div>');

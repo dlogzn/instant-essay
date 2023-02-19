@@ -44,7 +44,7 @@ class EssayController extends Controller
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Authorization: Bearer ' . env('OPENAI_BEARER_KEY')));
             $response = json_decode(curl_exec($ch), true);
             curl_close($ch);
-            return response()->json(['payload' => ['response' => $response, 'prompt' => $prompt]], Response::HTTP_OK);
+            return response()->json(['payload' => ['response' => $response, 'title' => ucwords($request->get('topic'))]], Response::HTTP_OK);
         } catch (\Exception $exception) {
             return response()->json(['message' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

@@ -15,12 +15,12 @@ use Illuminate\Support\Facades\Artisan;
 */
 
 Route::get('/', function () {
-    return redirect()->to('/account/panel/essay');
+    return redirect()->to('/login');
 });
 
 
 Route::get('/storage/link', function () {
-    exec(symlink('/home/goodgros/public_html/application/storage/app/public', '/home/goodgros/public_html/storage'));
+    exec(symlink('/home/pwp4dxklaflp/public_html/application/storage/app/public', '/home/pwp4dxklaflp/public_html/storage'));
 });
 
 Route::get('/clear/all', function() {

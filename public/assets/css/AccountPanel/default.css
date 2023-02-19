@@ -28,11 +28,19 @@ body {
     border-color: rgba(59, 171, 113, 0.29);
 }
 
+.user_dropdown::after {
+    content: none;
+}
+
 
 /*///////////////////////////////////////////////Defined///////////////////////////////////////////////*/
 
 .text_color_default  {
     color: #0c6c92;
+}
+
+.text_color_primary {
+    color: #00afef;
 }
 
 .text_color_secondary  {
