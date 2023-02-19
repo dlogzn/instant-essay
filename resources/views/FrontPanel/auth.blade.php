@@ -11,7 +11,11 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-7 col-lg-6 col-xl-5 col-xxl-4 mx-auto">
-                        <div id="sign_in_form_message" class="text-center text-danger my-3" style="height: 30px;"></div>
+                        <div id="sign_in_form_message" class="text-center text-danger my-3" style="height: 30px;">
+                            @if (Session::has('message'))
+                                <div class="alert alert-info">{{ Session::get('message') }}</div>
+                            @endif
+                        </div>
                         <form id="sign_in_form">
                             <div class="form-floating mb-4">
                                 <input type="text" class="form-control" name="email" id="email" placeholder="Email" autocomplete="off">

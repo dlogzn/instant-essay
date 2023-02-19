@@ -9,6 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
@@ -66,7 +68,8 @@ class AuthController extends Controller
                 return redirect()->intended('/account/panel/essay');
             }
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            Session::flash('message', $e->getMessage());
+            return Redirect::to('login');
         }
     }
 
