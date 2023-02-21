@@ -21,5 +21,6 @@ Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallbac
 
 
 
-
+Route::view('/privacy-policy', 'FrontPanel.privacy_policy', ['title' => 'Privacy Policy']);
+Route::view('/terms-of-service', 'FrontPanel.terms_of_service', ['title' => 'Terms of Service']);
 

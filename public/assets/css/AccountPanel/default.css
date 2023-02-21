@@ -110,7 +110,7 @@ body {
 }
 
 .btn_default:hover {
-    background-color: rgba(31, 34, 141, 0.73);
+    background-color: #0c6c92;
     color: white;
 }
 
