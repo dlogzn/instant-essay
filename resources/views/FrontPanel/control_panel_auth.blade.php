@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
                 <div class="text-center mt-4 mb-3">
-                    <img src="{{ asset('storage/images/default/icons8-sign-in-100.png') }}" style="height: 100px; width: 100px;">
+                    <img src="{{ asset('storage/images/default/icons8-enter-100.png') }}" style="height: 100px; width: 100px;">
                 </div>
                 <div class="text-center border-bottom pb-3" style="border-color: #e8f3ed !important;">
                     <div class="h4 text_color_7">Log in to Control Panel</div>

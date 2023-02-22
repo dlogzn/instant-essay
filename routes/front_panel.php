@@ -1,10 +1,16 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontPanel\AuthController;
+use App\Http\Controllers\FrontPanel\RegistrationController;
 
 Route::group(['prefix' => '/login'], function () {
     Route::get('/', [AuthController::class, 'index']);
     Route::post('/authenticate', [AuthController::class, 'authenticate']);
+});
+
+Route::group(['prefix' => '/registration'], function () {
+    Route::get('/', [RegistrationController::class, 'index']);
+    Route::post('/save', [RegistrationController::class, 'save']);
 });
 
 Route::group(['prefix' => '/control/panel/login'], function () {

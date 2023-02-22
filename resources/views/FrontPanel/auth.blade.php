@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mx-auto">
                 <div class="text-center fs-3 fw-bold mt-4">Welcome to Instant Essay</div>
-                <div class="fs-4 text_color_7 text-center mb-4">Log in to get started</div>
+                <div class="fs-4 text_color_7 text-center">Log in to get started</div>
 
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-7 col-lg-6 col-xl-5 col-xxl-4 mx-auto">
@@ -39,7 +39,7 @@
                                 <div class="row">
                                     <div class="col d-grid">
                                         <button type="submit" class="btn btn_default" id="sign_in_form_submit">
-                                            <span id="sign_in_form_submit_text">Sign in</span>
+                                            <span id="sign_in_form_submit_text">Log in</span>
                                             <div id="sign_in_form_submit_processing" class="d-flex align-items-center sr-only">
                                                 <span>Processing...</span>
                                                 <div class="spinner-border spinner-border-sm ms-auto" role="status" aria-hidden="true"></div>
@@ -52,7 +52,7 @@
                             <div class="row mt-4">
                                 <div class="col-12 col-sm-12 col-md-6 mb-4 mb-md-0">
                                     <div class="d-grid">
-                                        <a href="{{ url('/auth/google') }}" class="btn_google">
+                                        <a href="{{ url('/auth/google') }}" class="btn_google text-center">
                                             <img alt="Google" src="{{ asset('/storage/images/default/icons8-google-48.png') }}" style="height: 30px;">
                                             <span class="ms-2">Continue with Google</span>
                                         </a>
@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-6">
                                     <div class="d-grid">
-                                        <a href="{{ url('/auth/facebook') }}" class="btn_facebook">
+                                        <a href="{{ url('/auth/facebook') }}" class="btn_facebook text-center">
                                             <img alt="Facebook" src="{{ asset('/storage/images/default/icons8-facebook-circled-48.png') }}" style="height: 30px;">
                                             <span class="ms-2">Continue with Facebook</span>
                                         </a>
@@ -75,7 +75,7 @@
                 <div class="row mt-5">
                     <div class="col text-center">
                         <span class="me-3">Need an account with Instant Essay?</span>
-                        <a class="btn btn-outline-info" href="{{ url('/register') }}">Register</a>
+                        <a class="btn btn-outline-info" href="{{ url('/registration') }}">Register</a>
                     </div>
                 </div>
 

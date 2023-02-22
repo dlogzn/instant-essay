@@ -3,47 +3,81 @@
 @section('content')
     <div class="mt-4" style="min-height: 500px;">
         <div class="d-flex justify-content-between">
-            <div class="h4 fw-bold text_color_7">Tools</div>
-            <button type="button" class="btn btn-sm btn_default" id="add_tool">Add</button>
+            <div class="h4 fw-bold text_color_7">{{ $title }}</div>
         </div>
-        <div class="mt-4" id="tool_content"></div>
+        <div class="mt-4" id="essay_log_content"></div>
     </div>
 
 
 
     <script type="text/javascript">
         $(document).ready(function () {
-            getTools();
+            fetchEssayLogs();
         });
 
-        function getTools() {
+        function formatAMPM(date) {
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            let strTime = hours + ':' + minutes + ' ' + ampm;
+            return strTime;
+        }
+
+        function fetchEssayLogs() {
             $.ajax({
                 method: 'get',
-                url: '{{ url('/control/panel/tool/fetch/records') }}',
+                url: '{{ url('/control/panel/essay/log/fetch/records') }}',
                 success: function (result) {
                     console.log(result);
-                    $('#tool_content').empty();
+                    $('#essay_log_content').empty();
                     if (result.payload.length > 0) {
+                        let response;
                         $.each(result.payload, function (key, value) {
-                            $('#tool_content').append(`
+                            $('#essay_log_content').append(`
                                 <div class="card mb-4">
                                     <div class="card-body">
-                                        <div class="d-flex">
-                                            <div class="flex-shrink-0 text_color_primary fa-2x me-3">` + value.icon + `</div>
-                                            <div class="flex-grow-1">
-                                                <div class="fw-bold text_color_3">` + value.title + `</div>
-                                                <div class="text_color_a">` + value.hint + `</div>
+                                        <div class="d-flex justify-content-start justify-content-lg-between flex-column flex-lg-row">
+                                            <div class="">
+                                                <div class="fw-bold text_color_3">` + value.topic + `</div>
+                                                <div class="text_color_a">Requested Length: <span class="fw-bold">` + value.length + `</span></div>
+                                            </div>
+                                            <div class=""><div class="fw-bold text_color_3">` + value.user.name + `</div><div class="text_color_a">` + value.user.email + `</div></div>
+                                        </div>
+                                        <div class="mt-4" id="response_` + value.id + `"></div>
+                                        <div class="mt-4">
+                                            <div class="d-flex justify-content-between">
+                                                <div class="text_color_7">
+                                                    <span>Submitted on</span>
+                                                    <span class="fw-bold">` + $.datepicker.formatDate('MM dd, yy', new Date(value.created_at)) + `</span>
+                                                    <span>at</span>
+                                                    <span class="fw-bold">` + formatAMPM(new Date(value.created_at)) + `</span>
+                                                </div>
+                                                <div>
+                                                    <a href="javascript:void(0)" class="text-decoration-none edit_essay_log" data-id="` + value.id + `">Edit</a> | <a href="javascript:void(0)" class="text-decoration-none text-danger delete_tool" data-id="` + value.id + `">Delete</a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="mt-4">` + value.prompt + `</div>
-                                        <div class="mt-4"><a href="javascript:void(0)" class="text-decoration-none edit_tool" data-id="` + value.id + `">Edit</a> | <a href="javascript:void(0)" class="text-decoration-none text-danger delete_tool" data-id="` + value.id + `">Delete</a></div>
                                     </div>
                                 </div>
                             `);
+                            response = value.response.split('\n');
+                            $.each(response, function (k, row) {
+                                if (row === '') {
+                                    $('#response_' + value.id).append('<div style="margin: 15px;"></div>');
+                                } else {
+                                    if (row !== '' && row !== undefined) {
+                                        $('#response_' + value.id).append('<div class="mb-1">' + row + '</div>');
+                                    }
+                                }
+                            });
                         });
+
                     } else {
-                        $('#tool_content').append(`
-                            <div class="alert alert-warning text-center">No Tool Found!</div>
+                        $('#essay_log_content').append(`
+                            <div class="alert alert-warning text-center">No Essay Log Found!</div>
                         `);
                     }
                 },
@@ -52,104 +86,6 @@
                 }
             });
         }
-
-        $(document).on('click', '#add_tool', function () {
-            $('#tool_content').parent().find('#tool_modal').remove();
-            $('#tool_content').parent().append(`
-                <div class="modal" tabindex="-1" id="tool_modal">
-                    <div class="modal-dialog modal-dialog-centered modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header border-0">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="text-center border-bottom pb-3 border_color_default">
-                                    <div class="h4 text_color_7">Prompt Design</div>
-                                </div>
-                                <form id="tool_form">
-                                    <div class="row mb-4">
-                                        <div class="col-12 col-xl-6 mb-4 mb-xl-0">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control" name="title" id="title" placeholder="Title">
-                                                <label for="title">Title</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-xl-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control" name="hint" id="hint" placeholder="Hint">
-                                                <label for="hint">Hint</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-floating mb-4">
-                                        <textarea class="form-control" name="prompt" id="prompt" placeholder="Prompt" style="min-height: 150px;"></textarea>
-                                        <label for="prompt">Prompt</label>
-                                    </div>
-
-                                    <div class="row mb-4">
-                                        <div class="col-12 col-xl-6 mb-4 mb-xl-0">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control" name="temperature" id="temperature" placeholder="Temperature">
-                                                <label for="temperature">Temperature</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-xl-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control" name="max_tokens" id="max_tokens" placeholder="Max Tokens">
-                                                <label for="max_tokens">Max Tokens</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-4">
-                                        <div class="col-12 col-xl-6 mb-4 mb-xl-0">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control" name="icon" id="icon" placeholder="Icon">
-                                                <label for="icon">Icon</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-xl-6">
-                                            <div class="form-floating">
-                                                <select class="form-select" name="result_formatting" id="result_formatting">
-                                                    <option value="div">In Div</option>
-                                                    <option value="table">In Table</option>
-                                                </select>
-                                                <label for="result_formatting">Result Formatting</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-4">
-                                        <div class="col-12 col-xl-6 mb-4 mb-xl-0">
-                                            <div class="form-floating">
-                                                <select class="form-select" name="status" id="status">
-                                                    <option value="Active">Active</option>
-                                                    <option value="Inactive">Inactive</option>
-                                                </select>
-                                                <label for="status">status</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-xl-6">
-                                            <div class="form-floating">
-                                                <textarea class="form-control" name="narrative" id="narrative" placeholder="Narrative"></textarea>
-                                                <label for="narrative">Narrative</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="text-end">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn_default ms-4">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            `);
-            $('#tool_modal').modal('show');
-        });
 
         $(document).on('submit', '#tool_form', function (event) {
             event.preventDefault();
@@ -162,7 +98,7 @@
             formData.append('_token', '{{ csrf_token() }}');
             $.ajax({
                 method: 'post',
-                url: '{{ url('/control/panel/tool/save/record') }}',
+                url: '{{ url('/control/panel/essay/log/save/record') }}',
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -172,7 +108,7 @@
                     $('#tool_form_submit_text').removeClass('sr-only');
                     $('#tool_form_submit_processing').addClass('sr-only');
                     $('#tool_modal').modal('hide');
-                    getTools();
+                    fetchEssayLogs();
 
                     $.toast({
                         heading: 'Success',
@@ -207,18 +143,18 @@
             });
         });
 
-        $(document).on('click', '.edit_tool', function () {
-            $('#tool_content').parent().find('#tool_modal').remove();
+        $(document).on('click', '.edit', function () {
+            $('#essay_log_content').parent().find('#tool_modal').remove();
             let toolId = $(this).data('id');
             $.ajax({
                 method: 'get',
-                url: '{{ url('/control/panel/tool/fetch/record') }}',
+                url: '{{ url('/control/panel/essay/log/fetch/record') }}',
                 data: {
                     tool_id: toolId
                 },
                 success: function (result) {
                     console.log(result);
-                    $('#tool_content').parent().append(`
+                    $('#essay_log_content').parent().append(`
                         <div class="modal" tabindex="-1" id="tool_modal">
                             <div class="modal-dialog modal-dialog-centered modal-xl">
                                 <div class="modal-content">
@@ -351,7 +287,7 @@
                         action: function () {
                             $.ajax({
                                 method: 'post',
-                                url: '{{ url('/control/panel/tool/delete/record') }}',
+                                url: '{{ url('/control/panel/essay/log/delete/record') }}',
                                 data: formData,
                                 processData: false,
                                 contentType: false,
@@ -365,7 +301,7 @@
                                         hideAfter: 5000,
                                         position : 'bottom-right'
                                     });
-                                    getTools();
+                                    fetchEssayLogs();
                                 },
                                 error: function (xhr) {
                                     console.log(xhr);

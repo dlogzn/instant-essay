@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AccountPanel;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountPanel\EssayRequest;
+use App\Models\EssayLog;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -44,6 +45,15 @@ class EssayController extends Controller
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Authorization: Bearer ' . env('OPENAI_BEARER_KEY')));
             $response = json_decode(curl_exec($ch), true);
             curl_close($ch);
+            if ( ! array_key_exists('error', $response) ) {
+                $essayLog = new EssayLog();
+                $essayLog->user_id = auth()->user()->id;
+                $essayLog->topic = $request->get('topic');
+                $essayLog->length = $request->get('length');
+                $essayLog->response = $response['choices'][0]['text'];
+                $essayLog->status = 'Active';
+                $essayLog->save();
+            }
             return response()->json(['payload' => ['response' => $response, 'title' => ucwords($request->get('topic'))]], Response::HTTP_OK);
         } catch (\Exception $exception) {
             return response()->json(['message' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
