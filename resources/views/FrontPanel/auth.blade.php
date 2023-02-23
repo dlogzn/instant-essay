@@ -84,7 +84,52 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="usage_modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="mt-4 text-center fs-1 fw-bold fst-italic" style="color: #00afef;"><div>Welcome to</div><div style="margin-top: -15px;">Instant Essay!</div></div>
+                    <div class="mt-4 mb-3 text-center fs-4 fw-bold text_color_default">Capabilities:</div>
+                    <ul class="background_color_primary text_color_default">
+                        <li class="fs-5">Writes complete essay in under 30 seconds</li>
+                    </ul>
+                    <ul class="background_color_primary text_color_default">
+                        <li class="fs-5">Never writes the same essay twice</li>
+                    </ul>
+                    <div class="mt-4 mb-3 text-center fs-4 fw-bold text_color_default">Remember:</div>
+                    <ul class="background_color_primary text_color_default">
+                        <li class="fs-5">Our Technology is still in beta testing</li>
+                    </ul>
+                    <ul class="background_color_primary text_color_default">
+                        <li class="fs-5">Load time can be up to 30 seconds</li>
+                    </ul>
+                    <ul class="background_color_primary text_color_default">
+                        <li class="fs-5">Max essay length is 500 words</li>
+                    </ul>
+                    <div class="p-3 mt-4 rounded" style="background-color: #a1c6d5;">
+                        <div class="text-center fs-4 fw-bold text_color_default">Instant Essay 2.0 is coming soon!</div>
+                        <ul class="text_color_default">
+                            <li class="fs-5">Essays with more than 500 words</li>
+                            <li class="fs-5">Improved user interface</li>
+                        </ul>
+                    </div>
+                    <div class="text-center mt-4 mb-4">
+                        <button type="button" class="btn btn_secondary fst-italic fs-5" data-bs-dismiss="modal">Get Started</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#usage_modal').modal('show');
+
+        });
+
         $(document).on('submit', '#sign_in_form', function(event) {
             event.preventDefault();
             $('#sign_in_form_submit').addClass('disabled');

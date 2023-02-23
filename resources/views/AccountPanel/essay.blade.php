@@ -42,43 +42,11 @@
         </div>
     </div>
 
-    <div class="modal" id="usage_modal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="mt-4 text-center fs-1 fw-bold fst-italic" style="color: #00afef;"><div>Welcome to</div><div style="margin-top: -15px;">Instant Essay!</div></div>
-                    <div class="mt-4 mb-3 text-center fs-4 fw-bold text_color_default">To get your essay, simply:</div>
-                    <ul class="background_color_primary text_color_default">
-                        <li class="fs-5">Answer 2 questions on the form</li>
-                    </ul>
-                    <ul class="background_color_primary text_color_default">
-                        <li class="fs-5">Click "Write My Essay"</li>
-                    </ul>
-                    <div class="mt-4 mb-3 text-center fs-4 fw-bold text_color_default">Remember:</div>
-                    <ul class="background_color_primary text_color_default">
-                        <li class="fs-5">Our Technology is still in beta testing</li>
-                    </ul>
-                    <ul class="background_color_primary text_color_default">
-                        <li class="fs-5">Load time can be up to 30 seconds</li>
-                    </ul>
-                    <ul class="background_color_primary text_color_default">
-                        <li class="fs-5">The max length is 500 words. If you need longer than that, you will have to break it up. (i.e. Intro about To Kill a Mockingbird, conclusion about To Kill a Mockingbird, etc.)</li>
-                    </ul>
-                    <div class="text-center mt-4 mb-4">
-                        <button type="button" class="btn btn_secondary fst-italic fs-5" data-bs-dismiss="modal">Get Started</button>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-    </div>
 
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $('#usage_modal').modal('show');
 
-        });
 
         function copyToClipboard(element) {
             let $temp = $('<input>');

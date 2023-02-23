@@ -74,6 +74,39 @@ class AuthController extends Controller
     }
 
 
+    public function redirectToFacebook(): RedirectResponse
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleFacebookCallback(): RedirectResponse
+    {
+        try {
+            $user = Socialite::driver('facebook')->user();
+            $dbUser = User::where('provider_id', $user->id)->where('provider_name', 'Facebook')->first();
+            if($dbUser) {
+                Auth::login($dbUser);
+                return redirect()->intended('/account/panel/essay');
+            } else {
+                $newUser = User::create([
+                    'provider_name' => 'Facebook',
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'provider_id'=> $user->id,
+                    'password' => encrypt('123456'),
+                    'for' => 'Account Panel',
+                    'status' => 'Active'
+                ]);
+                Auth::login($newUser);
+                return redirect()->intended('/account/panel/essay');
+            }
+        } catch (\Exception $e) {
+            Session::flash('message', $e->getMessage());
+            return Redirect::to('login');
+        }
+    }
+
+
 
 
     public function logout(): RedirectResponse
