@@ -33,7 +33,7 @@
                                         </div>
                                     </div>
                                     <div class="col text-end" style="font-size: 14px;">
-                                        <a href="javascript:void(0)" class="text-decoration-none" style="color: #636363;">Forgot Password?</a>
+                                        <a href="{{ url('/forgot-password') }}" class="text-decoration-none" style="color: #636363;">Forgot Password?</a>
                                     </div>
                                 </div>
                                 <div class="row">
