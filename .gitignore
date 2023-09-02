@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /vendor
+.env
 .env.backup
 .env.production
 Homestead.json
@@ -15,4 +16,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-.env
+
